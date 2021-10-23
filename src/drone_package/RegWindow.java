@@ -15,7 +15,7 @@ public class RegWindow extends JFrame implements ActionListener{
 	private JLabel nameLabel = new JLabel("Enter Name: ");
 	private JLabel adressLabel = new JLabel("Enter Adress: ");
 	private JLabel phoneLabel = new JLabel("Enter Phone: ");
-	private JLabel orderQtyLabel = new JLabel("required Shipments: ");
+	private JLabel orderQtyLabel = new JLabel("Required Shipments: ");
 	private JTextField nameTextField = new JTextField();
 	private JTextField adressTextField = new JTextField();
 	private JTextField phoneTextField = new JTextField();
@@ -116,6 +116,7 @@ public class RegWindow extends JFrame implements ActionListener{
 
 
 		if(e.getSource() == registerButton) {
+			JOptionPane.showMessageDialog(frame, "Register Succeeded");
 			frame.dispose();
 			new WelcomeWindow();
 
