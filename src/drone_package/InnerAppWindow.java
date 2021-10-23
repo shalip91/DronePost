@@ -15,7 +15,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	private JLabel nameLabel;
 	private JLabel orderLabel;
 	private JButton summonDronButton = new JButton("Summon Drone");
-	private JButton assignDronButton = new JButton("Assign Dron");
+	private JButton assignDronButton = new JButton("Assign Drone");
 	private JButton histroyButton = new JButton("History");
 	private int H = 600;
 	private int W = 500;
