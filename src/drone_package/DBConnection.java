@@ -1,8 +1,8 @@
-package SQL;
+package drone_package;
 import java.sql.Connection; 
 import java.sql.DriverManager; 
 import java.sql.SQLException; 
-public class connClass {  
+public class DBConnection {  
 	public static Connection conn;  
 	public static Connection getConn() throws ClassNotFoundException  {   
 		try{    
