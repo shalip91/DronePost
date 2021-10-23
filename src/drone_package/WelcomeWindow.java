@@ -7,7 +7,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-//1
+import java.lang.Math;
+
 public class WelcomeWindow extends JFrame implements ActionListener{
 	private JFrame frame;
 	private JLabel titleLabel = new JLabel("Welcome to DronePost");
@@ -42,28 +43,31 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 	public void addComponents()
 	{
 		frame.add(titleLabel);
-//		frame.add(nameLabel);
+		frame.add(nameLabel);
+		frame.add(signInTextField);
+		frame.add(signInButton);
+		frame.add(registerButton);
 	}
 	
 	public void setLocation()
 	{
 		
 		titleLabel.setFont(new Font("Serif", Font.BOLD, 40));
-		Dimension size = titleLabel.getMaximumSize();
-		titleLabel.setBounds(40, 21, size.width, size.height);
+		
+		Dimension size = titleLabel.getPreferredSize();
+		titleLabel.setBounds(W/10, H/15, size.width, size.height);
 
+		nameLabel.setFont(new Font("Serif", Font.BOLD, 30));
+		size = nameLabel.getPreferredSize();
+		nameLabel.setBounds(W/20,H/3, size.width, size.height);
 		
-//		nameLabel.setFont(new Font("Serif", Font.BOLD, 30));
-//		nameLabel.setBounds(W/10,H/15, 200, 1);
+		signInTextField.setBounds((int)(W/2.3),H/3, W/2 , H/12);
 		
-//		titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
-//		titleLabel.setBounds(W/5,H/20, 400, 40);
-//		
-//		titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
-//		titleLabel.setBounds(W/5,H/20, 400, 40);
-//		
-//		titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
-//		titleLabel.setBounds(W/5,H/20, 400, 40);
+		signInButton.setFont(new Font("Serif", Font.BOLD, 30));
+		signInButton.setBounds(W/3, H/2, W/3, H/15);
+		
+		registerButton.setFont(new Font("Serif", Font.BOLD, 30));
+		registerButton.setBounds(W/3, (int)(H/1.5), W/3, H/15);
 
 	}
 	
