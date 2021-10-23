@@ -87,7 +87,7 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 		
 		if(e.getSource() == registerButton) {
 		frame.dispose();
-//		new RegWindow();
+		new RegWindow();
 		
 	}
 
