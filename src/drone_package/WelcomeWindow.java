@@ -71,30 +71,25 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 
 	public void actionEventFunc()
 	{
-//		getDetailsButton.addActionListener(this);
-//		putDetailsButton.addActionListener(this);
-//		nextButton.addActionListener(this);
+		signInButton.addActionListener(this);
+		registerButton.addActionListener(this);
+
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if(e.getSource() == getDetailsButton) {
-//			String args[] = argsText.getText().split(",");
-//			personGenerator.getDetails(args);
-//			argsText.setText("");
-//			fileNameText.setText("");
-//		}
-//		if(e.getSource() == putDetailsButton) {
-//			String name = fileNameText.getText();
-//			personFileName = name;
-//			personGenerator.putDetails(name);
-//			argsText.setText("");
-//			fileNameText.setText("");
-//		}
-//		if(e.getSource() == nextButton) {
-//			frame.dispose();
-//			new PersonTableForm(personFileName);
-//		}
+		if(e.getSource() == signInButton) {
+			String userName = signInTextField.getText();
+			frame.dispose();
+//			new InnerAppWindow(userName);
+			
+		}
+		
+		if(e.getSource() == registerButton) {
+		frame.dispose();
+//		new RegWindow();
+		
+	}
 
 	}
 	
