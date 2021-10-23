@@ -7,6 +7,7 @@ public class FirstClass {
 		System.out.println("hi ludo and oz good morninig ");
 		
 		//LOL sadasdffff
+		System.out.println("lol");
 	}
 
 }
