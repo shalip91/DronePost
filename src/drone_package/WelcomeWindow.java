@@ -50,7 +50,7 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 		
 		titleLabel.setFont(new Font("Serif", Font.BOLD, 40));
 		Dimension size = titleLabel.getMaximumSize();
-		titleLabel.setBounds(30, 20, size.width, size.height);
+		titleLabel.setBounds(40, 21, size.width, size.height);
 
 		
 //		nameLabel.setFont(new Font("Serif", Font.BOLD, 30));
