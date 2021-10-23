@@ -19,6 +19,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	private JButton histroyButton = new JButton("History");
 	private int H = 600;
 	private int W = 500;
+	private boolean droneArrived = false;
 	
 	public InnerAppWindow(String userName) {
 		nameLabel = new JLabel("Welcome " + userName + "!");
@@ -60,40 +61,48 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		titleLabel.setBounds((int)(W/4.2), H/30, (int)(W/1.2), H/10);
 
 		nameLabel.setFont(new Font("Serif", Font.BOLD, 30));
-		nameLabel.setBounds(W/20, (int)(H/3.5), (int)(W/2), H/6);
-//		
-//		signInTextField.setBounds((int)(W/2.3),H/3, W/2 , H/12);
-//		
-//		signInButton.setFont(new Font("Serif", Font.BOLD, 30));
-//		signInButton.setBounds(W/3, H/2, W/3, H/15);
-//		
-//		registerButton.setFont(new Font("Serif", Font.BOLD, 30));
-//		registerButton.setBounds(W/3, (int)(H/1.5), W/3, H/15);
+		nameLabel.setBounds(W/20, (int)(H/10), (int)(W/1.2), H/6);
+		
+		orderLabel.setFont(new Font("Serif", Font.BOLD, 30));
+		orderLabel.setBounds(W/20, (int)(H/6.5), (int)(W/1.2), H/6);
 
+		summonDronButton.setFont(new Font("Serif", Font.BOLD, 30));
+		summonDronButton.setBounds(W/4, H/2 - H/10, W/2, H/15);
+		
+		assignDronButton.setFont(new Font("Serif", Font.BOLD, 30));
+		assignDronButton.setBounds(W/4, H/2, W/2, H/15);
+		
+		histroyButton.setFont(new Font("Serif", Font.BOLD, 30));
+		histroyButton.setBounds(W/4, H/2 + H/10, W/2, H/15);
 	}
 	
 
 	public void actionEventFunc()
 	{
-//		signInButton.addActionListener(this);
-//		registerButton.addActionListener(this);
-
+		summonDronButton.addActionListener(this);
+		assignDronButton.addActionListener(this);
+		histroyButton.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if(e.getSource() == signInButton) {
-//			String userName = signInTextField.getText();
-//			frame.dispose();
-////			new InnerAppWindow(userName);
-//			
-//		}
-//		
-//		if(e.getSource() == registerButton) {
-//		frame.dispose();
-////		new RegWindow();
-		
-//		}
+		if(e.getSource() == summonDronButton) {
+			JOptionPane.showMessageDialog(frame, "Drone has arrived");
+			droneArrived = true;	
+		}
+		if(e.getSource() == assignDronButton) {
+			if (droneArrived) {
+				frame.dispose();
+//				new AssignDroneWindow();
+			}
+			else {
+				JOptionPane.showMessageDialog(frame, "You need to summon drone.");
+			}
+		}
+		if (e.getSource() == histroyButton) {
+			frame.dispose();
+//			new HistoryTableWindow();
+		}
 
 	}
 	

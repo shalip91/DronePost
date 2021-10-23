@@ -58,6 +58,7 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 		nameLabel.setFont(new Font("Serif", Font.BOLD, 30));
 		nameLabel.setBounds(W/20, (int)(H/3.5), (int)(W/2), H/6);
 		
+		signInTextField.setFont(new Font("Serif", Font.BOLD, 30));
 		signInTextField.setBounds((int)(W/2.3),H/3, W/2 , H/12);
 		
 		signInButton.setFont(new Font("Serif", Font.BOLD, 30));
