@@ -15,6 +15,8 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 	private JTextField signInTextField = new JTextField();
 	private JButton signInButton = new JButton("Sign In");
 	private JButton registerButton = new JButton("Register");
+	private int H = 600;
+	private int W = 500;
 	
 	public WelcomeWindow() {
 		createMyWindow();
@@ -26,7 +28,7 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 	{
 		frame=new JFrame();
 		frame.setTitle("Welcome Window");
-		frame.setBounds(30,30,600,400);
+		frame.setBounds(0,0,W,H);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(
 				         dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
@@ -37,18 +39,35 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 		frame.setResizable(false);
 	}
 	
-	public void setLocation()
-	{
-		
-		titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
-		titleLabel.setBounds(20,20,400,23);
-
-	}
-	
 	public void addComponents()
 	{
 		frame.add(titleLabel);
+//		frame.add(nameLabel);
 	}
+	
+	public void setLocation()
+	{
+		
+		titleLabel.setFont(new Font("Serif", Font.BOLD, 40));
+		Dimension size = titleLabel.getMaximumSize();
+		titleLabel.setBounds(30, 20, size.width, size.height);
+
+		
+//		nameLabel.setFont(new Font("Serif", Font.BOLD, 30));
+//		nameLabel.setBounds(W/10,H/15, 200, 1);
+		
+//		titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+//		titleLabel.setBounds(W/5,H/20, 400, 40);
+//		
+//		titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+//		titleLabel.setBounds(W/5,H/20, 400, 40);
+//		
+//		titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
+//		titleLabel.setBounds(W/5,H/20, 400, 40);
+
+	}
+	
+
 	public void actionEventFunc()
 	{
 //		getDetailsButton.addActionListener(this);
