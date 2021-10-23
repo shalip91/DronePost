@@ -101,25 +101,38 @@ public class RegWindow extends JFrame implements ActionListener{
 		phoneTextField.setFont(new Font("Serif", Font.BOLD, 30));
 
 		// selectionList bounds
-		selectionList.setBounds((int)(W/1.7), (int)(H/1.5) , (int)(W/3.5), H/7);
+		selectionList.setBounds((int)(W/1.5), (int)(H/1.5) , (int)(W/3.7), H/7);
 		selectionList.setFont(new Font("Serif", Font.BOLD, 30));
 	}
 
 	public void actionEventFunc()
 	{
 		registerButton.addActionListener(this);
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-
 		if(e.getSource() == registerButton) {
-			JOptionPane.showMessageDialog(frame, "Register Succeeded");
-			frame.dispose();
+			String name = nameTextField.getText();
+			String addr = adressTextField.getText();
+			String phone = phoneTextField.getText();
+			String bundleName = selectionList.getSelectedValue();
+			int ordersAmount = 50;
+			if (bundleName == "150(179$)") {
+				ordersAmount = 150;
+			}
+			
+			// TODO: verify against the db
+			boolean registerSucceeded = true;
+			if (registerSucceeded) {
+				JOptionPane.showMessageDialog(frame, "Register Succeeded");
+				frame.dispose();
+			}
+			else {
+				JOptionPane.showMessageDialog(frame, "register failed");
+			}
 			new WelcomeWindow();
-
 		}
 
 	}
