@@ -1,4 +1,4 @@
-package drone_package;
+package drone_package.GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
