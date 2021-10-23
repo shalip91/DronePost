@@ -20,9 +20,11 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	private int H = 600;
 	private int W = 500;
 	private boolean droneArrived = false;
+	private String userName;
 	
-	public InnerAppWindow(String userName) {
-		nameLabel = new JLabel("Welcome " + userName + "!");
+	public InnerAppWindow(String name) {
+		this.userName = name;
+		nameLabel = new JLabel("Welcome " + name + "!");
 		orderLabel = new JLabel("Remaining Orders: " + 10);
 		createMyWindow();
 		setLocation();
@@ -32,7 +34,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	public void createMyWindow()
 	{
 		frame=new JFrame();
-		frame.setTitle("Welcome Window");
+		frame.setTitle("Personal Space");
 		frame.setBounds(0,0,W,H);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(
@@ -93,7 +95,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		if(e.getSource() == assignDronButton) {
 			if (droneArrived) {
 				frame.dispose();
-//				new AssignDroneWindow();
+				new AssignDroneWindow(this.userName);
 			}
 			else {
 				JOptionPane.showMessageDialog(frame, "You need to summon drone.");

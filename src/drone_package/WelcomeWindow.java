@@ -65,7 +65,7 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 		signInButton.setBounds(W/3, H/2, W/3, H/15);
 		
 		registerButton.setFont(new Font("Serif", Font.BOLD, 30));
-		registerButton.setBounds(W/3, (int)(H/1.5), W/3, H/15);
+		registerButton.setBounds(W/3, H/2 + H/10, W/3, H/15);
 
 	}
 	
@@ -83,7 +83,6 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 			String userName = signInTextField.getText();
 			frame.dispose();
 			new InnerAppWindow(userName);
-			
 		}
 		
 		if(e.getSource() == registerButton) {
