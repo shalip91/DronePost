@@ -81,9 +81,19 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == signInButton) {
 			String userName = signInTextField.getText();
-			frame.dispose();
-			new InnerAppWindow(userName);
+			// TODO: verify against the data base
+			boolean validName = true;
+			if (validName) {
+				frame.dispose();
+				new InnerAppWindow(userName);
+			}
+			else {
+				JOptionPane.showMessageDialog(frame, "Please enter valid user name");
+			}
 		}
+			
+			
+			
 		
 		if(e.getSource() == registerButton) {
 		frame.dispose();
