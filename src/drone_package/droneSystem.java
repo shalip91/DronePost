@@ -6,11 +6,11 @@ import java.util.Queue;
 
 import drone_package.objects.Drone;
 
-public class DroneSystem {
+public class droneSystem {
 	private ArrayList<Drone> drones = new ArrayList<Drone>();
 	private Queue<Drone> queue = new LinkedList<Drone>();
 
-	public DroneSystem(int numberOfDrones) {
+	public droneSystem(int numberOfDrones) {
 		super();
 		this.createDrones(numberOfDrones);
 	}
