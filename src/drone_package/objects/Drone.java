@@ -1,14 +1,15 @@
 package drone_package.objects;
 
 public class Drone {
+	private static int totalDrones = 0;
 	private int id;
 	private boolean isAvailable;
 	private int batteryPercentage;
 	
 	
-	public Drone(int id) {
+	public Drone() {
 		super();
-		this.setId(id);
+		this.setId(totalDrones++);
 		this.setAvailable(true);
 		this.setBatteryPercentage(100);
 	}

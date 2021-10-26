@@ -17,7 +17,7 @@ public class droneSystem {
 	
 	private void createDrones(int numberOfDrones) {
 		for (int i = 0; i < numberOfDrones; ++i) {
-			drones.add(new Drone(i));
+			drones.add(new Drone());
 			queue.add(drones.get(i));
 		}
 	}

@@ -1,19 +1,23 @@
 package drone_package.objects;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Order {
+	private static int totalOrders = 0;
+	private static Date utilDate = new java.util.Date();
+	
 	private int id;
 	private String srcName;
 	private String dstName;
-	private LocalDateTime date;
+	private Timestamp dateTime;
 	
-	public Order(int id, String srcName, String dstName, LocalDateTime date) {
+	public Order(String srcName, String dstName) {
 		super();
-		this.setId(id);
+		this.setId(totalOrders++);
 		this.setSrcName(srcName);
 		this.setDstName(dstName);
-		this.setDate(date);
+		this.dateTime = new Timestamp(utilDate.getTime());
 	}
 
 	public int getId() {
@@ -28,6 +32,14 @@ public class Order {
 		return srcName;
 	}
 
+	public Timestamp getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(Timestamp dateTime) {
+		this.dateTime = dateTime;
+	}
+
 	public void setSrcName(String srcName) {
 		this.srcName = srcName;
 	}
@@ -40,11 +52,13 @@ public class Order {
 		this.dstName = dstName;
 	}
 
-	public LocalDateTime getDate() {
-		return date;
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", "
+				+ "srcName=" + srcName + ", "
+						+ "dstName=" + dstName + ", "
+								+ "date=" + dateTime.toString() + "]";
 	}
-
-	public void setDate(LocalDateTime date) {
-		this.date = date;
-	}
+	
+	
 }
