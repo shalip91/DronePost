@@ -7,7 +7,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import drone_package.dataBase.DronePostDB;
+
 import java.lang.Math;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class WelcomeWindow extends JFrame implements ActionListener{
 	private JFrame frame;
@@ -82,13 +87,20 @@ public class WelcomeWindow extends JFrame implements ActionListener{
 		if(e.getSource() == signInButton) {
 			String userName = signInTextField.getText();
 			// TODO: verify against the data base
-			boolean validName = true;
-			if (validName) {
-				frame.dispose();
-				new InnerAppWindow(userName);
-			}
-			else {
-				JOptionPane.showMessageDialog(frame, "Please enter valid user name");
+			DronePostDB db = new DronePostDB();
+			ResultSet rs = db.query("select * from users WHERE name = " + "'" + userName + "'");
+			try {
+				if (rs.next()) {
+					frame.dispose();
+					new InnerAppWindow(rs.getString("name"));
+				} else {
+					JOptionPane.showMessageDialog(frame, "Please enter valid user name, or register a new one");
+					frame.dispose();
+					new WelcomeWindow();
+				}
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
 			}
 		}
 			

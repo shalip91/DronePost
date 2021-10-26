@@ -23,35 +23,35 @@ import java.time.LocalDateTime;
 public class Main {
 	// Main function
 	public static void main(String[] args) throws SQLException {
-//		new WelcomeWindow();
-		DronePostDB db = new DronePostDB();
-//		User u1 = new User("tali", "nahariya", "4400", 30);
-//		db.insertUser(u1);
-//		ResultSet rs = db.query("select * from users WHERE name = " + "'shali'");
-//		rs.next();
-//		System.out.println(rs.getString("name"));
-//		rs.next();
-//		System.out.println(rs.getString("name"));
+		new WelcomeWindow();
+//		DronePostDB db = new DronePostDB();
+////		User u1 = new User("tali", "nahariya", "4400", 30);
+////		db.insertUser(u1);
+////		ResultSet rs = db.query("select * from users WHERE name = " + "'shali'");
+////		rs.next();
+////		System.out.println(rs.getString("name"));
+////		rs.next();
+////		System.out.println(rs.getString("name"));
+//		
+//		Order o1 = new Order("shali", "oz");
+//		Order o2 = new Order("shali", "tali");
+//		Order o3 = new Order("shali", "guy");
+////		db.insertOrder(o2);
+//		ResultSet rs2 = db.query("select * from orders WHERE src_name = " + "'shhhhali'");
+//		while (rs2.next()) {
+//			System.out.println(rs2.getString("src_name") + " " + rs2.getString("dst_name"));	
+//		}		
+//
+//		Message m1 = new Message("shali", "he man");
+//		Message m2 = new Message("shali", "he big man");
+//		Message m3 = new Message("tali", "he woman");
+//		Message m4 = new Message("shali", "what's up man???");
+////		db.insertMessage(m4);
+//		ResultSet rs3 = db.query("select * from message WHERE receiver = " + "'shali'");
+//		while (rs3.next()) {
+//			System.out.println(rs3.getString("receiver") + " " + rs3.getString("content"));	
+//		}	
 		
-		Order o1 = new Order("shali", "oz");
-		Order o2 = new Order("shali", "tali");
-		Order o3 = new Order("shali", "guy");
-//		db.insertOrder(o2);
-		ResultSet rs2 = db.query("select * from orders WHERE src_name = " + "'shali'");
-		while (rs2.next()) {
-			System.out.println(rs2.getString("src_name") + " " + rs2.getString("dst_name"));	
-		}		
-
-		Message m1 = new Message("shali", "he man");
-		Message m2 = new Message("shali", "he big man");
-		Message m3 = new Message("tali", "he woman");
-		Message m4 = new Message("shali", "what's up man???");
-//		db.insertMessage(m4);
-		ResultSet rs3 = db.query("select * from message WHERE receiver = " + "'shali'");
-		while (rs3.next()) {
-			System.out.println(rs3.getString("receiver") + " " + rs3.getString("content"));	
-		}	
-		
-		db.close();
+//		db.close();
 	}
 }

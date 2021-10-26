@@ -7,7 +7,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import drone_package.dataBase.DronePostDB;
+
 import java.lang.Math;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class InnerAppWindow extends JFrame implements ActionListener{
 	private JFrame frame;
@@ -23,14 +28,26 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	private String userName;
 	
 	public InnerAppWindow(String name) {
+		DronePostDB db = new DronePostDB();
+		ResultSet rs = db.query("select * from users WHERE name = " + "'" + name + "'");
+		
 		this.userName = name;
-		nameLabel = new JLabel("Welcome " + name + "!");
-		orderLabel = new JLabel("Remaining Orders: " + 10);
+		nameLabel = new JLabel("Welcome " + 
+				name.substring(0, 1).toUpperCase() + name.substring(1) + " !");
+		try {
+			rs.next();
+			orderLabel = new JLabel("Remaining Orders: " + rs.getInt("orders"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		createMyWindow();
 		setLocation();
 		addComponents();
 		actionEventFunc();
 	}
+	
 	public void createMyWindow()
 	{
 		frame=new JFrame();

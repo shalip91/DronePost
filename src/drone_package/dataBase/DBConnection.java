@@ -37,9 +37,9 @@ public class DBConnection {
 			return rs;
 		}
 		catch(Exception e) {
-			System.out.println(e);
-			return null;
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	public void close() {

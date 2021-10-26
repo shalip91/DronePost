@@ -7,6 +7,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import drone_package.dataBase.DronePostDB;
+
 import java.lang.Math;
 
 public class AssignDroneWindow extends JFrame implements ActionListener{
@@ -78,8 +81,12 @@ public class AssignDroneWindow extends JFrame implements ActionListener{
 			if (validDst) {
 				JOptionPane.showMessageDialog(frame, 
 						"Drone has assigned to destination succesfuly");
-				frame.dispose();
 				// TODO: update the order number
+				DronePostDB db = new DronePostDB();
+				db.decreaseOrder(userName);
+				db.close();
+				
+				frame.dispose();
 				new InnerAppWindow(this.userName);
 			}
 			else {

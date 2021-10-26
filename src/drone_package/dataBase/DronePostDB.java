@@ -1,5 +1,6 @@
 package drone_package.dataBase;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -17,7 +18,7 @@ public class DronePostDB extends DBConnection{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void insertUser(User user) {
+	public void insertUser(User user) throws SQLException {
 		String query = "insert into users (name, addr, phone, orders)" + "values (?, ?, ?, ?)";
 		try {
 			this.preStmt = (PreparedStatement) this.conn.prepareStatement(query);
@@ -28,7 +29,7 @@ public class DronePostDB extends DBConnection{
 			this.preStmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
 		}
 		
 	}
@@ -78,5 +79,23 @@ public class DronePostDB extends DBConnection{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void decreaseOrder(String name) {
+		String query = "update users set orders = ? where name = ?";
+		DronePostDB db = new DronePostDB();
+		ResultSet rs = db.query("select * from users WHERE name = " + "'" + name + "'");
+		try {
+			rs.next();
+			int oldValue = rs.getInt("orders");
+			this.preStmt = (PreparedStatement) this.conn.prepareStatement(query);
+			this.preStmt.setInt(1, oldValue-1);
+			this.preStmt.setString(2, name);
+			this.preStmt.executeUpdate(); // can allso be executeUpdate()
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		db.close();		
 	}
 }

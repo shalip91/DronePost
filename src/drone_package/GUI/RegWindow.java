@@ -7,6 +7,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import drone_package.dataBase.DronePostDB;
+import drone_package.objects.User;
+
 import java.lang.Math;
 
 public class RegWindow extends JFrame implements ActionListener{
@@ -123,16 +127,19 @@ public class RegWindow extends JFrame implements ActionListener{
 				ordersAmount = 150;
 			}
 			
-			// TODO: verify against the db
-			boolean registerSucceeded = true;
-			if (registerSucceeded) {
-				JOptionPane.showMessageDialog(frame, "Register Succeeded");
+			DronePostDB db = new DronePostDB();
+			try {
+				db.insertUser(new User(name, addr, phone, ordersAmount));
+				JOptionPane.showMessageDialog(frame, "register succeded");
 				frame.dispose();
+				new WelcomeWindow();
+			}catch(Exception exc) {
+				JOptionPane.showMessageDialog(frame, "register failed, try another name");
+				frame.dispose();
+				new RegWindow();
+			}finally {
+				db.close();
 			}
-			else {
-				JOptionPane.showMessageDialog(frame, "register failed");
-			}
-			new WelcomeWindow();
 		}
 
 	}
