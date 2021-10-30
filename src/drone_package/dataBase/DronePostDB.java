@@ -10,6 +10,9 @@ import drone_package.objects.Message;
 import drone_package.objects.Order;
 import drone_package.objects.User;
 
+import java.util.ArrayList;
+
+
 public class DronePostDB extends DBConnection{
 	private PreparedStatement preStmt;
 	
@@ -98,4 +101,64 @@ public class DronePostDB extends DBConnection{
 		}
 		db.close();		
 	}
+
+
+
+	public void getOrderSent(ArrayList<String> dateList, ArrayList<String> fromList, ArrayList<String> toList) {
+
+		ResultSet rs = this.query("select * from orders"); // WHERE name = " + "'" + name + "'");
+		try {
+			while(rs.next()) {
+				dateList.add(rs.getString("date_time"));
+				fromList.add(rs.getString("src_name"));
+				toList.add(rs.getString("dst_name"));
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		this.close();	
+	}
+
+	// // public String[] getOrderSent(String from, String to) {
+	// public void getOrderSent(ArrayList<String> fromList, ArrayList<String> toList) {
+	// 	// String fromIN = "empty";
+	// 	// String toIN = "empty";
+
+	// 	DronePostDB db = new DronePostDB();
+	// 	ResultSet rs = db.query("select * from orders"); // WHERE name = " + "'" + name + "'");
+	// 	try {
+
+	// 		// if(rs.next() == true) {
+	// 		rs.next();
+			
+	// 		fromList.add(rs.getString("src_name"));
+	// 		toList.add(rs.getString("dst_name"));
+
+
+	// 		// fromIN = new String(rs.getString("src_name"));
+	// 		// toIN = new String(to = rs.getString("dst_name"));
+			
+	// 		// }
+	// 		// else {
+	// 		// 	fromList.add(rs.getString("last - empty"));
+	// 		// 	toList.add(rs.getString("last - empty"));
+	// 		// }
+
+	// 	} catch (SQLException e1) {
+	// 		// TODO Auto-generated catch block
+	// 		e1.printStackTrace();
+	// 	}
+		
+	// 	db.close();		
+
+	// 	fromList.add("last - empty");
+	// 	toList.add("last - empty");
+	// 	// String[] stReturn = {fromIN, toIN}; 
+	// 	// return stReturn;
+	// }
+
+
+
+
 }
