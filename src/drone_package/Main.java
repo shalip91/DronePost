@@ -21,8 +21,13 @@ import drone_package.objects.User;
 import java.time.LocalDateTime;
 
 public class Main {
+	//Globals 
+	
 	// Main function
 	public static void main(String[] args) throws SQLException {
+		DroneSystem DS = DroneSystem.getInstance(10);
+		
+//		System.out.println(DS2.getDrones().size());
 		new WelcomeWindow();
 //		DronePostDB db = new DronePostDB();
 ////		User u1 = new User("tali", "nahariya", "4400", 30);
@@ -33,10 +38,10 @@ public class Main {
 ////		rs.next();
 ////		System.out.println(rs.getString("name"));
 //		
-//		Order o1 = new Order("shali", "oz");
-//		Order o2 = new Order("shali", "tali");
-//		Order o3 = new Order("shali", "guy");
-////		db.insertOrder(o2);
+//		Order o = new Order("shali", "oz");
+//		Order o = new Order("shali", "tali");
+//		Order o = new Order("shali", "guy");
+//		db.insertOrder(o);
 //		ResultSet rs2 = db.query("select * from orders WHERE src_name = " + "'shhhhali'");
 //		while (rs2.next()) {
 //			System.out.println(rs2.getString("src_name") + " " + rs2.getString("dst_name"));	

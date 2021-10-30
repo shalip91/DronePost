@@ -106,6 +106,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == summonDronButton) {
+			
 			JOptionPane.showMessageDialog(frame, "Drone has arrived");
 			droneArrived = true;	
 		}
