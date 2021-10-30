@@ -102,7 +102,6 @@ public class DronePostDB extends DBConnection{
 		db.close();		
 	}
 
-
 	public void getOrders(String[][] dataTable, String name, String sentOrReceived) {
 		ResultSet rs;
 		if (sentOrReceived == "sent") {
@@ -127,6 +126,19 @@ public class DronePostDB extends DBConnection{
 		this.close();	
 	}
 
-	
+	public int getOrdersIdCount() {
+		int count = 0;
+		ResultSet rs = this.query("select * from orders");// WHERE src_name = " + "'" + name + "'");
+		try {
+			while(rs.next()) {
+				++count;
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		this.close();	
+		return count;
+	}
 
 }

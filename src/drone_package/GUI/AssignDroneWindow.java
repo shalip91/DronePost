@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import drone_package.dataBase.DronePostDB;
+import drone_package.objects.Order;
 
 import java.lang.Math;
 
@@ -84,6 +85,11 @@ public class AssignDroneWindow extends JFrame implements ActionListener{
 				// TODO: update the order number
 				DronePostDB db = new DronePostDB();
 				db.decreaseOrder(userName);
+				
+				db = new DronePostDB();
+				Order order = new Order(this.userName, dstText.getText());
+				db.insertOrder(order);
+
 				db.close();
 				
 				frame.dispose();
