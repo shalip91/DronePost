@@ -22,6 +22,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	private JButton summonDronButton = new JButton("Summon Drone");
 	private JButton assignDronButton = new JButton("Assign Drone");
 	private JButton histroyButton = new JButton("History");
+	private JButton messagesButton = new JButton("Messages");
 	private int H = 600;
 	private int W = 500;
 	private boolean droneArrived = false;
@@ -71,6 +72,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		frame.add(summonDronButton);
 		frame.add(assignDronButton);
 		frame.add(histroyButton);
+		frame.add(messagesButton);
 	}
 	
 	public void setLocation()
@@ -93,6 +95,9 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		
 		histroyButton.setFont(new Font("Serif", Font.BOLD, 30));
 		histroyButton.setBounds(W/4, H/2 + H/10, W/2, H/15);
+		
+		messagesButton.setFont(new Font("Serif", Font.BOLD, 30));
+		messagesButton.setBounds(W/4, H/2 + H/10 + H/10, W/2, H/15);
 	}
 	
 
@@ -101,6 +106,7 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		summonDronButton.addActionListener(this);
 		assignDronButton.addActionListener(this);
 		histroyButton.addActionListener(this);
+		messagesButton.addActionListener(this);
 	}
 	
 	@Override
@@ -120,8 +126,12 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		}
 		if (e.getSource() == histroyButton) {
 			frame.dispose();
-			// new HistoryWindow();
 			new HistoryWindow(this.userName);
+		}
+		if (e.getSource() == messagesButton) {
+			frame.dispose();
+			new MessagesWindow(this.userName);
+
 		}
 
 	}

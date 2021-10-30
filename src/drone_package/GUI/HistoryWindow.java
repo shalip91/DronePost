@@ -122,7 +122,8 @@ public class HistoryWindow extends JFrame implements ActionListener{
 		boolean validDst = true;
 		if(e.getSource() == returnButton) {
 			frame.dispose();
-			new WelcomeWindow();
+			new InnerAppWindow(this.userName);
+			// new WelcomeWindow();
 		}
 	}
 
