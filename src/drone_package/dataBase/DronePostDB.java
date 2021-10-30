@@ -103,15 +103,22 @@ public class DronePostDB extends DBConnection{
 	}
 
 
-
-	public void getOrderSent(ArrayList<String> dateList, ArrayList<String> fromList, ArrayList<String> toList) {
-
-		ResultSet rs = this.query("select * from orders"); // WHERE name = " + "'" + name + "'");
+	public void getOrders(String[][] dataTable, String name, String sentOrReceived) {
+		ResultSet rs;
+		if (sentOrReceived == "sent") {
+			rs = this.query("select * from orders WHERE src_name = " + "'" + name + "'");
+		}
+		else {
+			rs = this.query("select * from orders WHERE dst_name = " + "'" + name + "'");
+		}
+		
 		try {
+			int i = 0;
 			while(rs.next()) {
-				dateList.add(rs.getString("date_time"));
-				fromList.add(rs.getString("src_name"));
-				toList.add(rs.getString("dst_name"));
+				dataTable[i][0] = (rs.getString("date_time"));
+				dataTable[i][1] = (rs.getString("src_name"));
+				dataTable[i][2] = (rs.getString("dst_name"));
+				++i;
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -120,45 +127,6 @@ public class DronePostDB extends DBConnection{
 		this.close();	
 	}
 
-	// // public String[] getOrderSent(String from, String to) {
-	// public void getOrderSent(ArrayList<String> fromList, ArrayList<String> toList) {
-	// 	// String fromIN = "empty";
-	// 	// String toIN = "empty";
-
-	// 	DronePostDB db = new DronePostDB();
-	// 	ResultSet rs = db.query("select * from orders"); // WHERE name = " + "'" + name + "'");
-	// 	try {
-
-	// 		// if(rs.next() == true) {
-	// 		rs.next();
-			
-	// 		fromList.add(rs.getString("src_name"));
-	// 		toList.add(rs.getString("dst_name"));
-
-
-	// 		// fromIN = new String(rs.getString("src_name"));
-	// 		// toIN = new String(to = rs.getString("dst_name"));
-			
-	// 		// }
-	// 		// else {
-	// 		// 	fromList.add(rs.getString("last - empty"));
-	// 		// 	toList.add(rs.getString("last - empty"));
-	// 		// }
-
-	// 	} catch (SQLException e1) {
-	// 		// TODO Auto-generated catch block
-	// 		e1.printStackTrace();
-	// 	}
-		
-	// 	db.close();		
-
-	// 	fromList.add("last - empty");
-	// 	toList.add("last - empty");
-	// 	// String[] stReturn = {fromIN, toIN}; 
-	// 	// return stReturn;
-	// }
-
-
-
+	
 
 }

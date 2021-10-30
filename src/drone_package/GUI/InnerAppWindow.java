@@ -120,7 +120,8 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		}
 		if (e.getSource() == histroyButton) {
 			frame.dispose();
-			new HistoryWindow();
+			// new HistoryWindow();
+			new HistoryWindow(this.userName);
 		}
 
 	}

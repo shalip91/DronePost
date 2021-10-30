@@ -23,16 +23,18 @@ public class HistoryWindow extends JFrame implements ActionListener{
 	private JScrollPane sentDronesScrollableTable;
 	private JScrollPane receivedDronesScrollableTable;
 
+	private JLabel sentDroneLabel = new JLabel("Sent");
+	private JLabel receivedDroneLabel = new JLabel("Received");
 	private JButton returnButton = new JButton("Return");
 	private int H = 600;
 	private int W = 500;
 	private String userName;
 
-	public HistoryWindow() {
+	public HistoryWindow(String name) {
+		userName = name;
+
 		createMyWindow();
-
-		testingTable();
-
+		getDataFromServer();
 		addComponents();
 		setLocation();
 		actionEventFunc();
@@ -55,26 +57,33 @@ public class HistoryWindow extends JFrame implements ActionListener{
 
 	public void addComponents()
 	{
-		// frame.add(sentDronesTable);
-		// frame.add(receivedDronesTable);
-
+		frame.add(sentDroneLabel);
 		frame.add(sentDronesScrollableTable);
+		frame.add(receivedDroneLabel);
 		frame.add(receivedDronesScrollableTable);
 		frame.add(returnButton);
 	}
 
 	public void setLocation()
 	{
-		// sentDronesTable.setFont(new Font("Serif", Font.PLAIN, 15));
-		// sentDronesTable.setBounds((int)(W/10), H/30, (int)(W/1.2), H/4);
+		int x = W/2 - 40;
+		int y = 10;
+		sentDroneLabel.setFont(new Font("Serif", Font.BOLD, 30));
+		sentDroneLabel.setBounds( x, y, 100, 30);
 
-		// receivedDronesTable.setFont(new Font("Serif", Font.PLAIN, 15));
-		// receivedDronesTable.setBounds((int)(W/10), H/30 + H/4, (int)(W/1.2), H/4);
-
-		sentDronesScrollableTable.setBounds((int)(W/10), H/30, (int)(W - (2 * (W/10))), H/4);
+		x = (W/10);
+		y += 30 + H/30;
+		sentDronesScrollableTable.setBounds(x , y, (int)(W - (2 * (W/10))), H/4);
     	sentDronesScrollableTable.setVisible(true);
-
-		receivedDronesScrollableTable.setBounds((int)(W/10), H/30 + H/4 + 20, (int)(W - (2 * (W/10))), H/4);
+		
+		x = W/2 - 60;
+		y += H/4 + H/30;
+		receivedDroneLabel.setFont(new Font("Serif", Font.BOLD, 30));
+		receivedDroneLabel.setBounds( x, y, 200, 30);
+		
+		x = (W/10);
+		y +=  H/30 + 30;
+		receivedDronesScrollableTable.setBounds(x, y, (int)(W - (2 * (W/10))), H/4);
     	receivedDronesScrollableTable.setVisible(true);
 
 
@@ -89,90 +98,24 @@ public class HistoryWindow extends JFrame implements ActionListener{
 	}
 
 
-
-
-
-	
-	public void testingTable() {
+	public void getDataFromServer() {
 		
 		String[] headers = { "Date", "From", "To" };
-
-		ArrayList<String> dateList = new ArrayList<>();
-		ArrayList<String> fromList = new ArrayList<>();
-		ArrayList<String> toList = new ArrayList<>();
+		String[][] sentTableData = new String[50][3];
+		String[][] receivedTableData = new String[50][3];
 
 		DronePostDB db = new DronePostDB();
-		db.getOrderSent(dateList, fromList, toList);
-
-		String[][] tableData = new String[fromList.size()][3];
-
-		for(int i = 0; i < fromList.size(); ++i) {
-			tableData[i][0] = dateList.get(i);
-			tableData[i][1] = fromList.get(i);
-			tableData[i][2] = toList.get(i);
-		}
-
-		// for(int i = 0; i < fromList.size(); ++i) {
-		// 	tableData[fromList.size() + i][0] = dateList.get(i);
-		// 	tableData[fromList.size() + i][1] = fromList.get(i);
-		// 	tableData[fromList.size() + i][2] = toList.get(i);
-		// }
-
-		sentDronesTable = new JTable(tableData, headers);
-		receivedDronesTable = new JTable(tableData, headers);
-
+		db.getOrders(sentTableData, userName, "sent");
+		sentDronesTable = new JTable(sentTableData, headers);
 		sentDronesScrollableTable = new JScrollPane(sentDronesTable);
+		
+		db = new DronePostDB();
+		db.getOrders(receivedTableData, userName, "received");
+		receivedDronesTable = new JTable(receivedTableData, headers);
 		receivedDronesScrollableTable = new JScrollPane(receivedDronesTable);
-
 		
 	}
 	
-	// archive
-	{
-	// public void testingTable() {
-		
-	// 	String[] headers = { "From", "To", "3"};
-	// 	// String[][] tableData = {{ "ludo", "shali"},{ "oz", "shali"}};
-	// 	// String[][] tableData = {{ "empty", "empty"},{ "empty", "empty"}};
-
-	// 	ArrayList<String> fromList = new ArrayList<>();
-	// 	ArrayList<String> toList = new ArrayList<>();
-	// 	DronePostDB db = new DronePostDB();
-	// 	db.getOrderSent(fromList, toList);
-		
-	// 	// String[] arrFrom = (String[])fromList.toArray();
-	// 	// String[] arrTo = (String[])toList.toArray();
-
-	// 	// String[][] tableData = {arrFrom, arrTo};
-	// 	// String[][] tableData = {arrFrom, arrTo};
-		
-	// 	// String[] f = {"a", "b", "c"};
-	// 	// String[] t = {"1", "2", "3"};
-	// 	// String[][] tableData = {f, t};
-	// 	String[][] tableData = {{"a", "b", "c"}, {"1", "2", "3"}};
-		
-	// 	// String[][] tableData = {{ (String[])fromList.toArray() }, {toList }};
-	// 	// String[][] tableData = {{ fromList.get(0), toList.get(0) },
-	// 							// {fromList.get(1), toList.get(1)} };							
-	// 	// {"empty", "empty" } };
-
-	// 	// tableData[0] = rowData;
-
-	// 	sentDronesTable = new JTable(tableData, headers);
-	// 	// sentDronesTable = new JTable(tableData, headers);
-
-		
-	// }
-	}
-
-
-
-
-
-
-
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
