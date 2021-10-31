@@ -102,24 +102,6 @@ public class AssignDroneWindow extends JFrame implements ActionListener{
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-			
-			
-			
-			
-//			if (validDst) {
-//				JOptionPane.showMessageDialog(frame, 
-//						"Drone has assigned to destination succesfuly");
-//				// TODO: update the order number
-//				DronePostDB db = new DronePostDB();
-//				db.decreaseOrder(userName);
-//				db.close();
-//				
-//				frame.dispose();
-//				new InnerAppWindow(this.userName);
-//			}
-//			else {
-//				JOptionPane.showMessageDialog(frame, "there is no such user in the system");
-//			}
 		}
 	}
 	

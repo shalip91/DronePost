@@ -5,9 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class Order {
-	// private static int totalOrders = 0;
 	private static DronePostDB Db = new DronePostDB();
-	private static int totalOrders = Db.getOrdersIdCount();
 	private static Date utilDate = new java.util.Date();
 	
 	private String srcName;
@@ -20,8 +18,6 @@ public class Order {
 		this.setDstName(dstName);
 		this.setDateTime(new Timestamp(utilDate.getTime()));
 	}
-
-
 
 	public String getSrcName() {
 		return srcName;
