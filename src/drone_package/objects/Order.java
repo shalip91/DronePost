@@ -10,26 +10,18 @@ public class Order {
 	private static int totalOrders = Db.getOrdersIdCount();
 	private static Date utilDate = new java.util.Date();
 	
-	private int id;
 	private String srcName;
 	private String dstName;
 	private Timestamp dateTime;
 	
 	public Order(String srcName, String dstName) {
 		super();
-		this.setId(totalOrders++);
 		this.setSrcName(srcName);
 		this.setDstName(dstName);
-		this.dateTime = new Timestamp(utilDate.getTime());
+		this.setDateTime(new Timestamp(utilDate.getTime()));
 	}
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getSrcName() {
 		return srcName;
@@ -57,8 +49,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", "
-				+ "srcName=" + srcName + ", "
+		return "srcName=" + srcName + ", "
 						+ "dstName=" + dstName + ", "
 								+ "date=" + dateTime.toString() + "]";
 	}

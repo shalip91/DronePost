@@ -12,6 +12,8 @@ import drone_package.dataBase.DronePostDB;
 import drone_package.objects.Order;
 
 import java.lang.Math;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AssignDroneWindow extends JFrame implements ActionListener{
 	private JFrame frame;
@@ -79,25 +81,45 @@ public class AssignDroneWindow extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		boolean validDst = true;
 		if(e.getSource() == sendButton) {
-			if (validDst) {
-				JOptionPane.showMessageDialog(frame, 
-						"Drone has assigned to destination succesfuly");
-				// TODO: update the order number
-				DronePostDB db = new DronePostDB();
-				db.decreaseOrder(userName);
-				
-				db = new DronePostDB();
-				Order order = new Order(this.userName, dstText.getText());
-				db.insertOrder(order);
-
-				db.close();
-				
-				frame.dispose();
-				new InnerAppWindow(this.userName);
+			String dstName = dstText.getText();
+			DronePostDB db = new DronePostDB();
+			ResultSet rs = db.query("select * from users WHERE name = " + "'" + dstName + "'");
+			try {
+				if (rs.next()) {
+					JOptionPane.showMessageDialog(frame, 
+							"Drone has assigned to destination succesfuly");
+					db.decreaseOrder(this.userName);
+					db.insertOrder(new Order(this.userName, dstName));
+					db.close();
+					frame.dispose();
+					new InnerAppWindow(this.userName);
+				} else {
+					JOptionPane.showMessageDialog(frame, "there is no such user in the system");
+					frame.dispose();
+					new AssignDroneWindow(this.userName);
+				}
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
 			}
-			else {
-				JOptionPane.showMessageDialog(frame, "there is now such user in the system");
-			}
+			
+			
+			
+			
+//			if (validDst) {
+//				JOptionPane.showMessageDialog(frame, 
+//						"Drone has assigned to destination succesfuly");
+//				// TODO: update the order number
+//				DronePostDB db = new DronePostDB();
+//				db.decreaseOrder(userName);
+//				db.close();
+//				
+//				frame.dispose();
+//				new InnerAppWindow(this.userName);
+//			}
+//			else {
+//				JOptionPane.showMessageDialog(frame, "there is no such user in the system");
+//			}
 		}
 	}
 	

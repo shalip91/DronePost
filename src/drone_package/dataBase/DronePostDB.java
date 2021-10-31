@@ -39,13 +39,12 @@ public class DronePostDB extends DBConnection{
 	
 	// add new Order to SQL server
 	public void insertOrder(Order order) {
-		String query = "insert into orders (order_id, src_name, dst_name, date_time)" + "values (?, ?, ?, ?)";
+		String query = "insert into orders (src_name, dst_name, order_date)" + "values (?, ?, ?)";
 		try {
 			this.preStmt = (PreparedStatement) this.conn.prepareStatement(query);
-			this.preStmt.setInt(1, order.getId());
-			this.preStmt.setString(2, order.getSrcName());
-			this.preStmt.setString(3, order.getDstName());
-			this.preStmt.setTimestamp(4, order.getDateTime());
+			this.preStmt.setString(1, order.getSrcName());
+			this.preStmt.setString(2, order.getDstName());
+			this.preStmt.setTimestamp(3, order.getDateTime());
 			this.preStmt.execute(); // can allso be executeUpdate()
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
