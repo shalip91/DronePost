@@ -14,7 +14,8 @@ import drone_package.dataBase.DronePostDB;
 import java.util.ArrayList;
 import javax.swing.table.TableModel;
 import drone_package.objects.Message;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class MessagesWindow extends JFrame implements ActionListener{
@@ -22,9 +23,10 @@ public class MessagesWindow extends JFrame implements ActionListener{
 	private JTable messageTable;
 	private JScrollPane ScrollableTable;
 	private JLabel messageLabel = new JLabel("My messages");
-	private JLabel dstLabel = new JLabel("Receiver Name");
+	private JLabel dstLabel = new JLabel("Receiver Name:");
+	private JLabel sendMessageLabel = new JLabel("Your message:");
 	private JTextField dstText = new JTextField();
-	private JTextField message = new JTextField();
+	private JTextField messageText = new JTextField();
 	private JButton sendButton = new JButton("Send");
 	private JButton returnButton = new JButton("Return");
 	private int H = 600;
@@ -33,7 +35,6 @@ public class MessagesWindow extends JFrame implements ActionListener{
 
 	public MessagesWindow(String name) {
 		userName = name;
-
 		createMyWindow();
 		getMessagesFromServer();
 		addComponents();
@@ -47,8 +48,7 @@ public class MessagesWindow extends JFrame implements ActionListener{
 		frame.setTitle("My Messages");
 		frame.setBounds(0,0,W,H);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation(
-				dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().setBackground(new Color(240,250,243));
 		frame.setVisible(true);
@@ -62,7 +62,8 @@ public class MessagesWindow extends JFrame implements ActionListener{
 		frame.add(ScrollableTable);
 		frame.add(dstLabel);
 		frame.add(dstText);
-		frame.add(message);
+		frame.add(sendMessageLabel);
+		frame.add(messageText);
 		frame.add(sendButton);
 		frame.add(returnButton);
 	}
@@ -79,24 +80,23 @@ public class MessagesWindow extends JFrame implements ActionListener{
 		ScrollableTable.setBounds(x , y, (int)(W - (2 * (W/10))), H/4);
     	ScrollableTable.setVisible(true);
 		
-		y += H/4;
-		dstLabel.setFont(new Font("Serif", Font.BOLD, 30));
-		dstLabel.setBounds(W/20, y, (int)(W/2), H/6);		
+		dstLabel.setFont(new Font("Serif", Font.BOLD, 20));
+		dstLabel.setBounds(x ,250 ,300 , 30);		
+		
+		dstText.setFont(new Font("Serif", Font.BOLD, 20));
+		dstText.setBounds(x ,280 ,200 , 30);
 
-		y += 10 + H/12;
-		dstText.setFont(new Font("Serif", Font.BOLD, 30));
-		dstText.setBounds(x ,y , 400 , H/12);
+		sendMessageLabel.setFont(new Font("Serif", Font.BOLD, 20));
+		sendMessageLabel.setBounds(x ,310 ,300 , 30);		
 
-		y += 10 + H/12;
-		message.setFont(new Font("Serif", Font.BOLD, 30));
-		message.setBounds(x ,y , 400 , H/12);
+		messageText.setFont(new Font("Serif", Font.BOLD, 20));
+		messageText.setBounds(x ,340 , 400 , 30);
 
-		y += H/12;
-		sendButton.setFont(new Font("Serif", Font.BOLD, 30));
-		sendButton.setBounds(W/4, y, W/2, H/15);
+		sendButton.setFont(new Font("Serif", Font.BOLD, 25));
+		sendButton.setBounds(x ,380 , 100, 30);
 
 		returnButton.setFont(new Font("Serif", Font.BOLD, 30));
-		returnButton.setBounds(W/4, (int)(H/1.2) , W/2, H/15);
+		returnButton.setBounds(W/4,500 , W/2, H/15);
 	}
 
 
@@ -122,17 +122,37 @@ public class MessagesWindow extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		boolean validDst = true;
+		
+		// return button - go to previous screen
 		if(e.getSource() == returnButton) {
 			frame.dispose();
 			new InnerAppWindow(this.userName);
 		}
+		
+		// send button - check if destination user exist in the system
 		if(e.getSource() == sendButton) {
-			frame.dispose();
+		
+			String dstName = dstText.getText();
 			DronePostDB db = new DronePostDB();
-			Message message = new Message(this.userName, this.dstText.getText(), this.message.getText());
-			db.insertMessage(message);
-			new InnerAppWindow(this.userName);
+			ResultSet rs = db.query("select * from users WHERE name = " + "'" + dstName + "'");
+			try {
+				if (rs.next()) {
+
+					frame.dispose();
+					db = new DronePostDB();
+					Message message = new Message(this.userName, this.dstText.getText(), this.messageText.getText());
+					db.insertMessage(message);
+					new MessagesWindow(this.userName);
+
+				} else {
+					JOptionPane.showMessageDialog(frame, "there is no such user in the system");
+				}
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+
+
 		}
 	}
 
