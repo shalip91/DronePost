@@ -1,9 +1,13 @@
 package drone_package.objects;
+import drone_package.dataBase.DronePostDB;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 public class Order {
+	// private static int totalOrders = 0;
+	private static DronePostDB Db = new DronePostDB();
+	private static int totalOrders = Db.getOrdersIdCount();
 	private static Date utilDate = new java.util.Date();
 	
 	private String srcName;
