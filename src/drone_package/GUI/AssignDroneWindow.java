@@ -8,7 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import drone_package.DroneSystem;
 import drone_package.dataBase.DronePostDB;
+import drone_package.details.MyBoolHolder;
 import drone_package.objects.Order;
 
 import java.lang.Math;
@@ -23,10 +25,13 @@ public class AssignDroneWindow extends JFrame implements ActionListener{
 	private JButton sendButton = new JButton("Send");
 	private int H = 600;
 	private int W = 500;
-	private String userName;
 	
-	public AssignDroneWindow(String name) {
+	private String userName;
+	private MyBoolHolder droneArrived;
+	
+	public AssignDroneWindow(String name, MyBoolHolder droneArrived) {
 		this.userName = name;
+		this.droneArrived = droneArrived;
 		createMyWindow();
 		setLocation();
 		addComponents();
@@ -85,18 +90,17 @@ public class AssignDroneWindow extends JFrame implements ActionListener{
 			DronePostDB db = new DronePostDB();
 			ResultSet rs = db.query("select * from users WHERE name = " + "'" + dstName + "'");
 			try {
-				if (rs.next()) {
-					JOptionPane.showMessageDialog(frame, 
-							"Drone has assigned to destination succesfuly");
+				if (rs.next()) { // the destination user exists. 
+					DroneSystem.getInstance().assigneDrone(frame, droneArrived.getDroneId());
 					db.decreaseOrder(this.userName);
 					db.insertOrder(new Order(this.userName, dstName));
 					db.close();
 					frame.dispose();
 					new InnerAppWindow(this.userName);
 				} else {
-					JOptionPane.showMessageDialog(frame, "there is no such user in the system");
+					JOptionPane.showMessageDialog(frame, "There is no such user in the system");
 					frame.dispose();
-					new AssignDroneWindow(this.userName);
+					new AssignDroneWindow(this.userName, this.droneArrived);
 				}
 			} catch (SQLException e2) {
 				// TODO Auto-generated catch block

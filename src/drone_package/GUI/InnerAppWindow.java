@@ -8,11 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import drone_package.DroneSystem;
 import drone_package.dataBase.DronePostDB;
+import drone_package.details.MyBoolHolder;
 
 import java.lang.Math;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 
 public class InnerAppWindow extends JFrame implements ActionListener{
 	private JFrame frame;
@@ -25,8 +28,8 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 	private JButton messagesButton = new JButton("Messages");
 	private int H = 600;
 	private int W = 500;
-	private boolean droneArrived = false;
 	private String userName;
+	MyBoolHolder droneArrived = new MyBoolHolder(false);	
 	
 	public InnerAppWindow(String name) {
 		DronePostDB db = new DronePostDB();
@@ -109,20 +112,19 @@ public class InnerAppWindow extends JFrame implements ActionListener{
 		messagesButton.addActionListener(this);
 	}
 	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == summonDronButton) {
-			
-			JOptionPane.showMessageDialog(frame, "Drone has arrived");
-			droneArrived = true;	
+			DroneSystem.getInstance().summonDrone(frame, droneArrived);
 		}
 		if(e.getSource() == assignDronButton) {
-			if (droneArrived) {
+			if (droneArrived.getValue()) {
 				frame.dispose();
-				new AssignDroneWindow(this.userName);
+				new AssignDroneWindow(userName, droneArrived);
 			}
 			else {
-				JOptionPane.showMessageDialog(frame, "You need to summon drone.");
+				JOptionPane.showMessageDialog(frame, "You need to summon drone, or wait for his arrival");
 			}
 		}
 		if (e.getSource() == histroyButton) {

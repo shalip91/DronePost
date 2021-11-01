@@ -21,13 +21,9 @@ import drone_package.objects.User;
 import java.time.LocalDateTime;
 
 public class Main {
-	//Globals 
-	
 	// Main function
 	public static void main(String[] args) throws SQLException {
-		DroneSystem DS = DroneSystem.getInstance(10);
-		
-//		System.out.println(DS2.getDrones().size());
+		DroneSystem DS = DroneSystem.getInstance();
 		new WelcomeWindow();
 //		DronePostDB db = new DronePostDB();
 ////		User u1 = new User("tali", "nahariya", "4400", 30);
