@@ -12,6 +12,7 @@ import drone_package.DroneSystem;
 import drone_package.dataBase.DronePostDB;
 import drone_package.details.MyBoolHolder;
 import drone_package.objects.Order;
+import drone_package.objects.Message;
 
 import java.lang.Math;
 import java.sql.ResultSet;
@@ -99,6 +100,10 @@ public class AssignDroneWindow extends JFrame implements ActionListener{
 					new InnerAppWindow(this.userName);
 				} else {
 					JOptionPane.showMessageDialog(frame, "There is no such user in the system");
+
+					db = new DronePostDB();
+					db.insertMessage(new Message("System Manager", this.userName, "There is no such user (" + dstName + ") in the system"));
+
 					frame.dispose();
 					new AssignDroneWindow(this.userName, this.droneArrived);
 				}
